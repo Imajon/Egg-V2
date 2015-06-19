@@ -1,0 +1,176 @@
+<html>
+	<head>
+		<title>Upload</title>
+		<meta name="viewport" content="initial-scale=1.0; user-scalable=0;">
+      <meta charset="utf-8">
+      <style type="text/css">
+      body{
+      	text-align: center;
+      	margin: 0;
+		  font-family: Helvetica Neue;
+		  font-weight: 200;
+      }
+      p{
+      	margin: 0;
+      }
+        .buttonUp {
+	    	position: relative;
+          background-color: #EDEDED;
+          border-radius: 0px;
+          font-size: 20px;
+		  font-family: Helvetica Neue;
+          font-weight: bold;
+          color: #888;
+        }
+		.form input[type="file"]{
+		    z-index: 999;
+		    line-height: 0;
+		    font-size: 50px;
+		    opacity: 0;
+		    filter: alpha(opacity = 0);-ms-filter: "alpha(opacity=0)";
+		    cursor: pointer;
+		    _cursor: hand;
+		    margin: 0;
+		    padding:0;
+		}
+		#myfile{
+			display: none;
+		}
+		.add-photo-btn,#path,#submitButton{
+		    position:relative;
+		    overflow:hidden;
+		    cursor:pointer;
+		    text-align:center;
+		  font-family: Helvetica Neue;
+		    background-color:#ffb29b;
+		    color:#FFF;
+		    display:block;
+		    width:200px;
+		    height:31px;
+		    font-size:15px;
+		    line-height:30px;
+		    font-weight: bold;
+		    margin: auto;
+		}
+		input[type="text"]{
+		}    
+		.form{
+			text-align: right;
+		}  
+		#path{
+			border: none;
+			border-radius: 0;
+			background-color: none;
+		}  
+		#submitButton,#path{
+			display: block;
+			background-color: #86ffc7;
+		}
+		.messButon{
+			font-size: 12px;
+		    width:200px;
+		    border: none;
+		    border-radius: 5px;
+		    padding: 5px;
+		}
+      </style>
+      <!--[if IE]>
+	<style type="text/css">
+	      body{
+	      	text-align: center;
+	      }
+	        .buttonUp {
+	    	position: relative;
+	          background-color: #EDEDED;
+	          border-radius: 0px;
+	          font-size: 20px;
+	          font-family: Arial;
+	          font-weight: bold;
+	          color: #888;
+	        }
+			.form input[type="file"]{
+			    z-index: 999;
+			    line-height: 0;
+			    font-size: 50px;
+			    opacity: 0;
+			    filter: alpha(opacity = 0);-ms-filter: "alpha(opacity=0)";
+			    cursor: pointer;
+			    _cursor: hand;
+			    margin: 0;
+			    padding:0;
+			}
+			#myfile{
+				display: none;
+			}
+			.add-photo-btn,#path,#submitButton{
+			    position:relative;
+			    overflow:hidden;
+			    cursor:pointer;
+			    text-align:center;
+			    font-family: arial;
+			    background-color:#ffb29b;
+			    color:#FFF;
+			    display:block;
+			    width:200px;
+			    height:31px;
+			    font-size:15px;
+			    line-height:30px;
+			    font-weight: bold;
+			    margin: auto;
+			}
+			input[type="text"]{
+			}    
+			.form{
+				text-align: center;
+			}  
+			#path{
+				border: none;
+				border-radius: 0;
+				background-color: none;
+			}  
+			#submitButton,#path{
+				display: block;
+				background-color: #86ffc7;
+			}
+	      </style>      
+	      <![endif]-->      
+  </head>
+  <body>
+	<form action="/upload.htm" enctype="multipart/form-data" method="post" id="form">
+	<p class="form">
+	    <input type="text" id="path"/>
+		<label class="add-photo-btn">Selectionner une image
+			<span>
+				<input type="file" name="upload" id="upload">
+			</span>
+		</label>
+	<textarea rows="5" value="Mess" name="messButon" id="messButon" class="messButon"></textarea>
+	<input type="submit" value="Ajouter" id="submitButton" class="buttonUp">
+	</p>
+
+	</form>
+    <script src="js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript">
+		/*var searchString = window.location.search.substring(1);
+		var arrayURL = searchString.split('?');
+		var object = window.document.getElementById('form');
+		object.action = '/upload.htm?'+arrayURL[0];*/
+		$(document).ready(function(){
+			  $('#path').hide();
+			  $('#submitButton').hide();
+			  $('.messButon').hide();
+			$('#submitButton').click(function(){
+			  $('#submitButton').hide();
+			});
+			$('#upload').change(function(){
+			  $('.messButon').show();
+			  $('#path').show();
+			  $('#submitButton').show();
+			  $('#path').val($(this).val());
+			});
+		})
+	</script>
+  </body>
+  </html
+ </body>
+  </html

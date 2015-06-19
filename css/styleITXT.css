@@ -1,0 +1,108 @@
+@charset "UTF-8";
+/* CSS Document */
+
+		body{
+			background-color:#111;
+			color:#666666;
+			font-family:Verdana, Geneva, sans-serif;
+		}
+		.btnClass{
+		width:100%;
+		height:30px;
+		}
+		.floatClass{
+		width:250px;
+		text-align:center;
+		margin-left:auto;
+		margin-right:auto;
+		}
+		.font1{
+		color:#FFFFFF;
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		font-size:10px;
+		}
+		.font2{
+		color:#777;
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		font-size:10px;
+		text-align:center;
+		}		
+		@media only screen 
+		and (min-width : 321px) {
+		}
+		@media only screen 
+		and (max-width : 320px) {
+		}
+        .dragClass { float:left;width: 70px; height: 70px; padding: 0.5em; margin: 5px;background-color:rgba(0,0,0,0.6);color:#CCCCCC;}
+        #droppable { width: 90%; height: 80px; padding: 0.5em; margin: 10px;margin-left:auto;margin-right:auto;color:#FFFFFF; overflow:auto;}
+		.centerClass{
+		background-color:#000;
+		background-repeat:no-repeat;
+		background-position:right;
+		}
+		#container{
+		font-family:Georgia, "Times New Roman", Times, serif;
+		}
+		.demo{
+		font-size:16px;
+		width:90%;
+		margin:auto;
+		text-align:justify;
+		margin-top:40px;
+		font-family:"Courier New", Courier, monospace;
+		}	
+		.spanTXT{
+			color:#444;	
+			-webkit-transition: color 350ms ease-out; //transition webkit
+			-moz-transition: color 350ms ease-out; //transition mozilla
+			-o-transition: color 350ms ease-out; //transition opera
+			transition: color 350ms ease-out;
+		}
+		.spanTXT:active{
+			// color:#F00;	
+		}
+		.classColor1{
+			color:#F00;	
+		}
+		.demo2{
+		font-size:16px;
+		width:90%;
+		margin:auto;
+		margin-top:40px;
+		text-align:justify;
+		font-family:"Courier New", Courier, monospace;
+		}		
+		.demo3{
+		font-size:16px;
+		width:90%;
+		margin:auto;
+		margin-top:40px;
+		text-align:justify;
+		font-family:"Courier New", Courier, monospace;
+		height:100px;
+			overflow:hidden;		
+		}		
+		.ui-state-highlight{
+		background-color:#990000;
+		}
+		.ui-state-hover, .ui-state-active, .ui-state-highlight{
+		background-color:#0099CC;
+		}
+		.back1{
+		background-color:#FFFFFF;
+		}
+		.back2{
+		background-color:#990000;
+		}
+		#FirstName{
+		width:110px;
+		}
+		#pJon{
+			color:#666666;
+		}
+		.displayClass{
+		display:none;
+		}
+		.ui-widget-content{
+			background-position:center;
+		}

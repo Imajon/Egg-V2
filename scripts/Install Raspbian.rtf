@@ -1,0 +1,150 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 HelveticaNeue;\f2\fmodern\fcharset0 Courier;
+\f3\fnil\fcharset0 Monaco;\f4\froman\fcharset0 Times-Roman;\f5\fswiss\fcharset0 ArialMT;
+\f6\fnil\fcharset0 Verdana;\f7\fmodern\fcharset0 CourierNewPSMT;}
+{\colortbl;\red255\green255\blue255;\red236\green236\blue236;\red0\green0\blue246;\red249\green249\blue249;
+\red38\green38\blue38;\red246\green246\blue246;\red234\green234\blue234;\red52\green52\blue52;\red26\green26\blue26;
+\red42\green42\blue42;\red242\green242\blue242;\red40\green123\blue63;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww17420\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 \
+
+\b\fs38 INSTALL NOOB
+\b0 \
+
+\fs24 sudo apt-get install nodejs npm unclutter
+\f1\fs26 \cb2  dnsmasq hostapd picocom glob2 arduino python python-setuptools python-jinja2 python-configobj\
+git clone git://github.com/amperka/ino.git\
+cd ino/\
+sudo make install\
+\pard\pardeftab720
+\cf3 \cb4 \ul \ulc3 \
+\pard\pardeftab720
+
+\f2\fs24 \cf5 \cb6 \ulnone sudo apt-get install python g++ make checkinstall fakeroot
+\f1\fs26 \cf3 \cb4 \ul \ulc3 \
+
+\f2\fs24 \cf5 \cb6 \ulnone src=$(mktemp -d) && cd $src\
+wget -N http://nodejs.org/dist/node-latest.tar.gz\
+tar xzvf node-latest.tar.gz && cd node-v*\
+./configure\
+fakeroot checkinstall -y --install=no --pkgversion $(echo $(pwd) | sed -n -re's/.+node-v(.+)$/\\1/p') make -j$(($(nproc)+1)) install\
+sudo dpkg -i node_*
+\f1\fs26 \cf3 \cb4 \ul \ulc3 \
+\
+cd noob/\
+\pard\pardeftab720
+
+\f3 \cf0 \cb1 \ulnone sudo npm install socket.io\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f1 \cf0 \cb2 \
+\pard\pardeftab720
+
+\f4\fs38 \cf0 \cb7 git clone git://github.com/amperka/ino.git\
+easy_install ino
+\f1\fs26 \cb2 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+\cf0 \
+\pard\pardeftab720
+
+\f2\fs24 \cf5 \cb6 git clone https://imajon@bitbucket.org/imajon/noob.git
+\f1\fs26 \cf3 \cb4 \ul \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural
+
+\f0\fs24 \cf0 \cb1 \ulnone cd
+\f1\fs26 \cf3 \cb4 \ul \
+\pard\pardeftab720
+\cf3 git clone git://git.drogon.net/wiringPi\
+cd wiringPi/\
+./build\
+cd\
+sudo rm -rf wiringpi\
+\
+sudo mv /home/pi/noob/scripts/startNode /etc/init.d/\
+sudo update-rc.d startNode defaults\
+sudo mv /home/pi/noob/scripts/90midori 
+\f0\b\fs22 \cf0 \cb1 \ulnone /etc/X11/Xsession.d/\
+\
+
+\f1\b0\fs26 \cf3 \cb4 \ul sudo mv /home/pi/noob/scripts/startRFID /etc/init.d/\
+sudo update-rc.d startRFID defaults\
+sudo mv /home/pi/noob/scripts/pythonMirror.py /home/pi/\
+\
+sudo mv /home/pi/noob/scripts/showIP /etc/init.d/\
+sudo update-rc.d showIP defaults\
+sudo mv /home/pi/noob/scripts/showIP_display /home/pi/\
+\
+sudo mv /home/pi/noob/scripts/blink-l.sh_/home/pi/\
+\
+\pard\pardeftab720
+
+\b\fs22 \cf0 \cb1 \ulnone sudo mv mirror.rules 
+\i\b0\fs28 \cf8 /etc/udev/rules.d/mirror.rules\
+sudo /etc/init.d/udev restart\
+sudo mv /home/pi/noob/PCD /home/pi/
+\f0\i0\b\fs22 \cf0 \
+\
+\pard\pardeftab720
+
+\fs44 \cf0 RFID
+\fs22 \
+sudo nano 
+\f4\i\b0\fs28 \cf8 /etc/udev/rules.d/mirror.rules\
+KERNEL=="hidraw*", ATTRS\{idVendor\}=="1da8", ATTRS\{idProduct\}=="1301", SYMLINK+="mirror", MODE="0666"\
+\pard\pardeftab720\sa480\qj
+\cf8 sudo /etc/init.d/udev restart\
+\pard\pardeftab720
+
+\f0\i0\b\fs44 \cf0 DISPLAY\
+\pard\pardeftab720
+
+\f5\b0\fs29 \cf9 cc -o pcd8544_display_now pcd8544_display_txt.2c ../PCD8544.c -L/usr/local/lib -lwiringPi\
+cc -o pcd8544_rpi pcd8544_rpi.c ../PCD8544.c -L/usr/local/lib -lwiringPi\
+cc -o pcd8544_display_txt pcd8544_display_txt.c ../PCD8544.c -L/usr/local/lib -lwiringPi\
+cc -o pcd8544_display_oeuf2 pcd8544_display_progress.c ../PCD8544.c -L/usr/local/lib -lwiringPi\
+\
+\pard\pardeftab720
+
+\b\fs47 \cf9 IP\
+\pard\pardeftab720\sa200
+
+\f6\b0\fs22 \cf10 \cb11 ifconfig eth0 | grep "inet ad" | cut -f2 -d: | awk '\{print $1\}'
+\f5\fs29 \cf9 \cb1 \
+\pard\pardeftab720
+\cf9 \
+\pard\pardeftab720
+
+\b\fs41 \cf9 Ligne TXT
+\b0\fs29 \
+echo "Message " > resultGrep | wc -l result1 | xargs | cut -d" " -f1 >> resultGrep\
+perl -pi.orig -e 's/\\n/ /' resultGrep\
+\
+
+\b\fs43 PySerial\
+\pard\pardeftab720
+
+\f7\b0\fs26 \cf9 tar -xvf\'a0pyserial-2-1.5.tar\
+cd pyserial-2-1.5\
+sudo python setup.py install
+\f5\fs29 \
+\
+import serial\
+ser = serial.Serial('/dev/ttyACM0', 9600)\
+ser.write('5')\
+\
+\pard\pardeftab720
+
+\b\fs41 \cf9 Command
+\b0\fs29 \
+ps ax | grep -v grep | grep $SERVICE > /dev/null\
+\pard\pardeftab720
+
+\f3\fs24 \cf12 ps -e | grep startNode | kill `awk '\{print $1\}'`\
+\
+\pard\pardeftab720
+
+\f2\fs21 \cf0 wget -O /lib/firmware/isl3886pci https://daemonizer.de/prism54/prism54-fw/fw-softmac/2.13.25.0.arm
+\f5\fs29 \cf9 \
+}
