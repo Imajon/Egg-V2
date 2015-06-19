@@ -1,5 +1,5 @@
 #!/bin/bash
-convert /home/pi/noob/uploadsDir/$1 -resize 500 /home/pi/noob/uploadsDir/mini/$1
+convert /home/pi/noob/uploadsDir/$1 -resize 500 -auto-orient /home/pi/noob/uploadsDir/mini/$1
 #sips --resampleWidth 500 $1 --out uploadsDir/mini -s format jpeg
 #identify $1 | cut -d' ' -f 3 | cut -d'x' -f 1
 #if [ $(identify $1 | cut -d' ' -f 3 | cut -d'x' -f 1)>$(identify $1 | cut -d' ' -f 3 | cut -d'x' -f 2) ]; then
