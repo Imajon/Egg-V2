@@ -7,7 +7,7 @@ var app = require('http').createServer(handler)
   ,url = require("url")
   ,path = require("path")
   ,spawn = require('child_process').spawn
-  ,ls = spawn('python', ["pythonArduino.py"]);
+  ,ls = spawn('python', ["scripts/pythonArduino.py"]);
 //io.set('destroy upgrade',false);
 ls.stdout.setEncoding('utf8');
 
@@ -30,6 +30,13 @@ var result = [];
 var nbTouch = 0;
 
 app.listen(80);
+function execDebian(cible){
+	exec(cible, function(err, stdout, stderr) {
+		console.log(err);
+		console.log(stdout);
+		console.log(stderr);
+	});			
+}
 
 fs.readFile('scripts/index.txt', 'utf8', function (err,data) {
 	var resultServer = '';
@@ -50,28 +57,23 @@ ls.stdout.on('data', function (data) {
 ls.stderr.on('data', function (data) {
     console.log('stderr: ' + data);
 });	
-
-function execDebian(cible){
-	exec(cible, function(err, stdout, stderr) {
-		console.log(err);
-		console.log(stdout);
-		console.log(stderr);
-	});			
+function goLed(){
+		execDebian('scripts/writeSerie "1;0;0;90;0;6;0"');	
 }
+var IDtime = setTimeout(goLed,3000);
 function returnFalse(cible,cible2){
 	cible=cible2;
 }
 function handler ( request, response ) {
 	function throw404(){
-		response.writeHead(404, {
+		/*response.writeHead(404, {
 			"Content-Type": "text/plain"
 		});
-		response.write("404 Not Found\n");
-		/*
+		response.write("404 Not Found\n");*/
 		response.writeHead("301",
 		  {Location: 'http://10.0.0.1/index.htm'}
 		);
-		response.write("ok\n");	*/	
+		response.write("ok\n");
 		return;			
 	}
 	function throw500(){
@@ -109,13 +111,14 @@ function handler ( request, response ) {
 				}); 			    
 			});
 			form.on('end', function(err, fields, files) {
-				execDebian('/home/pi/noob/scripts/writeSerie "6;60;0;90;30;1000"');
+				execDebian('scripts/writeSerie "6;60;0;90;30;1000;0"');
 				io.sockets.emit('upload_notif', {img:'uploadsDir/'+fileName,mess:mess,date:datejour});						
-				exec('/home/pi/noob/scripts/resizeScript '+fileName, function(err, stdout, stderr) {
+				exec('scripts/resizeScript '+fileName, function(err, stdout, stderr) {
 					console.log(err);
 					console.log(stdout);
 					console.log(stderr);						
 				});			
+
 				response.writeHead(301,
 				  {Location: 'upload.htm'}
 				);
@@ -142,7 +145,7 @@ function handler ( request, response ) {
 	fs.exists(filename, function(exists){
 		if (!exists){
  			if(uri.indexOf('RFID')==1){			
-				//execDebian("/home/pi/noob/scripts/writeSerie 'E'");
+				//execDebian("scripts/writeSerie 'E'");
 			}			 
  			if(uri.indexOf('capture')==1){			
 				var uro = uri.split('--');
@@ -157,7 +160,7 @@ function handler ( request, response ) {
 			response.write(String(file), "binary");
 			response.end();
  			//if(uri.indexOf('shut101')==1){			
-			//	execDebian("sudo /home/pi/noob/scripts/shut.sh");			
+			//	execDebian("sudo scripts/shut.sh");			
 			//}				
 		});
 		return;
@@ -172,7 +175,7 @@ function millisEgg(){
 function addTwit(){
 	if(idTwt<=33){
 	  var resultTwit = Math.floor(idTwt/3);
-	  execDebian('/home/pi/noob/scripts/showOeuf '+resultTwit);
+	  //execDebian('scripts/showOeuf '+resultTwit);
 	}
 	idTwt++;
 }
@@ -189,9 +192,10 @@ io.sockets.on( 'connection', function ( socket ) {
     	users.push(me);
     	me.all = users.length;
     	me.img = result.length;
+    	me.nbTouch = nbTouch;
     	socket.emit('newusr',me);
     	usersNum++;    	
-		execDebian('/home/pi/noob/scripts/writeSerie "6;90;0;0;50;1000"');
+		//execDebian('scripts/writeSerie "6;90;0;0;50;1000;0"');
 		console.log('write')
 	});
 	var resultImg2 = '';

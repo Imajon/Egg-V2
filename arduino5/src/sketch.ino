@@ -4,7 +4,7 @@
 
 #define PIN 6
 #define PIXEL 29
-CapacitiveSensor   cs_4_2 = CapacitiveSensor(2,3);        // 10M resistor between pins 4 & 2, pin 2 is sensor pin, add a wire and or foil if desired
+CapacitiveSensor   cs_4_2 = CapacitiveSensor(3,5);        // 10M resistor between pins 4 & 2, pin 2 is sensor pin, add a wire and or foil if desired
 
 //CapacitiveSensor   cs_4_7 = CapacitiveSensor(4,7);        // 10M resistor between pins 4 & 2, pin 2 is sensor pin, add a wire and or foil if desired
 
@@ -41,8 +41,7 @@ int valueColor1 = 0;
 int valueColor2 = 0;
 int valueColor3 = 0;
 
-int sensibility = 4000;
-
+int sensibility = 2500;
 int sensibility2 = 1600;
 // IMPORTANT: To reduce NeoPixel burnout risk, add 1000 uF capacitor across
 // pixel power leads, add 300 - 500 Ohm resistor on first pixel's data input
@@ -119,23 +118,24 @@ void setup() {
   Serial.begin(9600);
   strip.begin();
   strip.show();
-  cs_4_2.set_CS_AutocaL_Millis(2000);     // turn off autocalibrate on channel 1 - just as an example
-  //cs_4_2.set_CS_Timeout_Millis(2000);
+  //cs_4_2.set_CS_AutocaL_Millis(5000);     // turn off autocalibrate on channel 1 - just as an example
   //cs_4_7.set_CS_AutocaL_Millis(200000);     // turn off autocalibrate on channel 1 - just as an example
   uView.begin();
   uView.clear(ALL);
   uView.display();  
   // Set UP pulsation led for all
-  startInt(periode,1000,0,2,0,PIXEL);
+  startInt(periode,300,0,2,0,PIXEL);
   startInt(periodeCible,1000,0,2,0,PIXEL);
   startInt(amplitudeR,0,0,2,0,PIXEL);
   startInt(amplitudeG,0,0,2,0,PIXEL);
-  startInt(amplitudeB,90,0,2,0,PIXEL);
+  startInt(amplitudeB,0,0,2,0,PIXEL);
   startInt(amplitudeRCible,0,0,2,0,PIXEL);
   startInt(amplitudeGCible,0,0,2,0,PIXEL);
-  startInt(amplitudeBCible,90,0,2,0,PIXEL);
+  startInt(amplitudeBCible,0,0,2,0,PIXEL);
   startInt(polarity,1,0,2,0,PIXEL);
-  startInt(arrayRandom,0,10,3,0,PIXEL);
+  decalLedFour(arrayRandom,50,100);
+
+//  startInt(arrayRandom,0,10,80,0,PIXEL);
 
   // Set UP pulsation led for the 4 last
   startInt(amplitudeR,0,0,2,PIXEL-4,PIXEL);
@@ -144,19 +144,26 @@ void setup() {
   startInt(amplitudeRCible,0,0,2,PIXEL-4,PIXEL);
   startInt(amplitudeGCible,0,0,2,PIXEL-4,PIXEL);
   startInt(amplitudeBCible,0,0,2,PIXEL-4,PIXEL);
+  /////////////////////////////////////
+  selectLed(0,26,0,0,90);
+
 }
 void loop() {
     time = millis();
     long start = millis();
-    //long total1 =  cs_4_2.capacitiveSensor(30);    
+    //long total1 =  cs_4_2.capacitiveSensor(5);    
+    //cs_4_2.set_CS_Timeout_Millis(300);
+
     //long total2 =  cs_4_7.capacitiveSensor(30);    
     //int capacitiv1 = readCapacitivePin(5);
     ////
+    //Serial.print(millis() - start);        // check on performance in milliseconds
+    //Serial.print("\t");                    // tab character for debug windown spacing
     //Serial.print("total1 ");
     //Serial.println(total1);
     //Serial.print(" total2 ");
     //Serial.println(total2);
-    /*if(total1>sensibility){
+     /*if(total1>sensibility){
       Serial.println("A");
       boolPulseA=true;
       timePulseA = millis();
@@ -185,7 +192,7 @@ void loop() {
               //boolColor=false;
               boolPulse=false;
               timePulse = millis();
-              selectLed(0,PIXEL,red,green,blue);
+              selectLed(start,stop,red,green,blue);
            break;        
            case 1:
               //boolColor=false;
@@ -234,7 +241,18 @@ void loop() {
            break;        
            case 9: 
              phaseLedB(start,stop,red,green,blue,phase);
-           break;        
+           break;  
+           case 10: 
+             phaseLed_cible(start,stop,red,green,blue);
+           break;  
+           case 11: 
+             decalLedFour(arrayRandom,start,stop);
+           break;  
+           case 12: 
+              startInt(amplitudeRCible,red,0,2,0,PIXEL);
+              startInt(amplitudeGCible,green,0,2,0,PIXEL);
+              startInt(amplitudeBCible,blue,0,2,0,PIXEL);
+           break;             
            case 100:
               zeroRed=red;
               zeroBleu=blue;
@@ -243,7 +261,6 @@ void loop() {
         }
       }
     }  
-    /*
     uView.clear(PAGE);    // clear page
     uView.setCursor(0,0); // set cursor to 0,0
     uView.print(timePulse); // display Mid
@@ -252,7 +269,6 @@ void loop() {
     uView.setCursor(0,20); // set cursor to 0,0
     uView.print(122+122*cos(2*PI/2000*((300)-time))); // display Mid
     uView.display();
-    */
     if(millis()-timePulseA>1000 && boolPulseA==true){
       selectLed(0,PIXEL,0,0,90);
       //startInt(periodeCible,1500,0,true,0,PIXEL);      
@@ -324,9 +340,9 @@ void loop() {
         periodeCible[i] = periodeProgress[randomPeriode];
         timePeriode=millis();
       }*/
-      int colorRdbCos = zeroRed+floor(amplitudeR[i]+amplitudeR[i]*cos(2*PI/periode[i]*((300*arrayRandom[i])-time)))*polarity[i];
-      int colorGdbCos = zeroBleu+floor(amplitudeG[i]+amplitudeG[i]*cos(2*PI/periode[i]*((300*arrayRandom[i])-time)))*polarity[i];
-      int colorBbCos = zeroGreen+floor(amplitudeB[i]+amplitudeB[i]*cos(2*PI/periode[i]*((300*arrayRandom[i])-time)))*polarity[i];
+      int colorRdbCos = zeroRed+floor(amplitudeR[i]+amplitudeR[i]*cos(2*PI/periode[i]*((arrayRandom[i])-time)))*polarity[i];
+      int colorGdbCos = zeroBleu+floor(amplitudeG[i]+amplitudeG[i]*cos(2*PI/periode[i]*((arrayRandom[i])-time)))*polarity[i];
+      int colorBbCos = zeroGreen+floor(amplitudeB[i]+amplitudeB[i]*cos(2*PI/periode[i]*((arrayRandom[i])-time)))*polarity[i];
       strip.setPixelColor(i, strip.Color(colorRdbCos, colorGdbCos,colorBbCos));
       strip.show();
     }
@@ -350,6 +366,23 @@ void phaseLed(int ledStart,int ledStop, int cibleRed, int cibleGreen, int cibleB
     triOndeColor(12-i, cibleRed, cibleGreen, cibleBleu);
     triOndeColor(24-i, cibleRed, cibleGreen, cibleBleu);
     triOndeColor(13+i, cibleRed, cibleGreen, cibleBleu);
+  }
+}
+void phaseLed_cible(int ledStart,int ledStop, int cibleRed, int cibleGreen, int cibleBleu){
+  for(int i=ledStart; i<ledStop; i++) {
+    triColor(i, cibleRed, cibleGreen, cibleBleu);
+    triColor(12-i, cibleRed, cibleGreen, cibleBleu);
+    triColor(24-i, cibleRed, cibleGreen, cibleBleu);
+    triColor(13+i, cibleRed, cibleGreen, cibleBleu);
+  }
+}
+
+void decalLedFour(int cible[], int valueStart,int value){
+  for(int i=0; i<6; i++) {
+    cible[i]=valueStart+value*i;
+    cible[13+i]=valueStart+value*i;
+    cible[12-i]=valueStart+value*i;
+    cible[24-i]=valueStart+value*i;
   }
 }
 void phaseLedA(int ledStart,int ledStop, int cibleRed, int cibleGreen, int cibleBleu, int phase){

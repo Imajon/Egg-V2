@@ -4,4 +4,4 @@
 #sleep 0.4
 #echo 'B' >&3
 #sleep 0.5
-echo $1 > /dev/ttyUSB0
+echo $1 > /dev/ttyACM0
