@@ -60,6 +60,7 @@ function execDebian(cible){
 function returnFalse(cible,cible2){
 	cible=cible2;
 }
+<<<<<<< HEAD
 
 /*ls.stdout.on('data', function (data) {
 	if(data.indexOf("egg01")!=-1){    						
@@ -101,6 +102,19 @@ function handler ( request, response ) {
 		  {Location: 'http://10.0.0.1/index.htm'}
 		);
 		response.write("ok\n");		
+=======
+function handler ( request, response ) {
+	function throw404(){
+		response.writeHead(404, {
+			"Content-Type": "text/plain"
+		});
+		response.write("404 Not Found\n");
+		/*
+		response.writeHead("301",
+		  {Location: 'http://10.0.0.1/index.htm'}
+		);
+		response.write("ok\n");	*/	
+>>>>>>> 9799479b13463f7d8eae611493547c0a004b50eb
 		return;			
 	}
 	function throw500(){
@@ -137,14 +151,23 @@ function handler ( request, response ) {
 				        console.log("The file was saved!");
 				    }
 				}); 			    
+<<<<<<< HEAD
 				execDebian("/home/pi/noob/scripts/writeSerie 'C'");
 			});
 			form.on('end', function(err, fields, files) {
+=======
+			});
+			form.on('end', function(err, fields, files) {
+				io.sockets.emit('upload_notif', {img:'uploadsDir/'+fileName,mess:mess,date:datejour});						
+>>>>>>> 9799479b13463f7d8eae611493547c0a004b50eb
 				exec('/home/pi/noob/scripts/resizeScript '+fileName, function(err, stdout, stderr) {
 					console.log(err);
 					console.log(stdout);
 					console.log(stderr);						
+<<<<<<< HEAD
 					io.sockets.emit('upload_notif', {img:'uploadsDir/'+fileName,mess:mess,date:datejour});						
+=======
+>>>>>>> 9799479b13463f7d8eae611493547c0a004b50eb
 				});			
 				response.writeHead(301,
 				  {Location: 'upload.htm'}
@@ -202,7 +225,11 @@ function millisEgg(){
 function addTwit(){
 	if(idTwt<=33){
 	  var resultTwit = Math.floor(idTwt/3);
+<<<<<<< HEAD
 	  //execDebian('/home/pi/noob/scripts/showOeuf '+resultTwit);
+=======
+	  execDebian('/home/pi/noob/scripts/showOeuf '+resultTwit);
+>>>>>>> 9799479b13463f7d8eae611493547c0a004b50eb
 	}
 	idTwt++;
 }

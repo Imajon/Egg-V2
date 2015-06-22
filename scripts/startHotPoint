@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sudo update-rc.d dnsmasq defaults
+#sudo update-rc.d udhcpd defaults
+sudo update-rc.d hostapd defaults
+sudo cp /home/pi/noob/scripts/interface_HotPoint /etc/network/interfaces
+sudo reboot

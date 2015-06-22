@@ -72,6 +72,9 @@ function addFile(fileName,message,datejour){
 	    }
 	});	
 }
+	console.log(data);
+	io.sockets.emit('arduino_notif', nbTouch);	
+});
 ls.stderr.on('data', function (data) {
     console.log('stderr: ' + data);
 });	

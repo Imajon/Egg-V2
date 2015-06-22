@@ -1,0 +1,10 @@
+#!/bin/bash
+
+sudo update-rc.d dnsmasq remove
+sudo update-rc.d hostapd remove
+sudo cp /home/pi/noob/scripts/interface_wlan /etc/network/interfaces
+sudo reboot
+
+
+
+
