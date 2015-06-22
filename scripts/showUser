@@ -1,6 +1,0 @@
-
-#!/bin/bash
-
-echo $1-Users > /home/pi/noob/resultUsersChat
-/home/pi/noob/scripts/writeSerie 'A'
-#/home/pi/noob/scripts/showIP_display

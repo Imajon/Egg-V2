@@ -1,5 +1,0 @@
-#!/bin/bash
-
-sudo /home/pi/PCD/samples/pcd8544_display_User
-sleep 3
-sudo /home/pi/PCD/samples/pcd8544_display_oeuf_IP
