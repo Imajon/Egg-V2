@@ -146,10 +146,6 @@ void setup() {
   startInt(amplitudeBCible,0,0,2,PIXEL-4,PIXEL);
   /////////////////////////////////////
   selectLed(0,26,0,0,90);
-<<<<<<< HEAD
-=======
-
->>>>>>> 9799479b13463f7d8eae611493547c0a004b50eb
 }
 void loop() {
     time = millis();
@@ -320,11 +316,7 @@ void loop() {
         amplitudeG[i]=amplitudeGCible[i];                 
         amplitudeB[i]=amplitudeBCible[i];                   
       }*/
-<<<<<<< HEAD
-      if(floor(amplitudeR[i]+amplitudeR[i]*cos(2*PI/periode[i]*(arrayRandom[i]-time)))==0 && floor(amplitudeG[i]+amplitudeG[i]*cos(2*PI/periode[i]*(arrayRandom[i]-time)))==0 && floor(amplitudeB[i]+amplitudeB[i]*cos(2*PI/periode[i]*(arrayRandom[i]-time)))==0){
-=======
       if(floor(amplitudeR[i]+amplitudeR[i]*cos(2*PI/periode[i]*((300*arrayRandom[i])-time)))==0 && floor(amplitudeG[i]+amplitudeG[i]*cos(2*PI/periode[i]*((300*arrayRandom[i])-time)))==0 && floor(amplitudeB[i]+amplitudeB[i]*cos(2*PI/periode[i]*((300*arrayRandom[i])-time)))==0){
->>>>>>> 9799479b13463f7d8eae611493547c0a004b50eb
           //randomArray[i] = random(0,5); 
           //Serial.println(i);
           amplitudeR[i]=amplitudeRCible[i];                 
@@ -336,11 +328,7 @@ void loop() {
           //int randomPeriode = random(0,5);
       }
       if(periode[i]!=periodeCible[i]){
-<<<<<<< HEAD
         if(floor(amplitudeR[i]+amplitudeR[i]*cos(2*PI/periodeCible[i]*(arrayRandom[i]-time)))==0 && floor(amplitudeG[i]+amplitudeG[i]*cos(2*PI/periodeCible[randomArray[i]]*(arrayRandom[i]-time)))==0 && floor(amplitudeB[i]+amplitudeB[i]*cos(2*PI/periodeCible[randomArray[i]]*(arrayRandom[i]-time)))==0){
-=======
-        if(floor(amplitudeR[i]+amplitudeR[i]*cos(2*PI/periodeCible[i]*((300*arrayRandom[i])-time)))==0 && floor(amplitudeG[i]+amplitudeG[i]*cos(2*PI/periodeCible[randomArray[i]]*((300*arrayRandom[i])-time)))==0 && floor(amplitudeB[i]+amplitudeB[i]*cos(2*PI/periodeCible[randomArray[i]]*((300*arrayRandom[i])-time)))==0){
->>>>>>> 9799479b13463f7d8eae611493547c0a004b50eb
           periode[i]=periodeCible[i]; 
           //periodeCible[i]=random(1000,4000); 
           polarity[i] = 1;
