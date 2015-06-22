@@ -8,11 +8,7 @@ import sys
 import serial
     
 # Opening mirror.
-<<<<<<< HEAD
 mirror = serial.Serial("/dev/ttyUSB0", 9600)
-=======
-mirror = serial.Serial("/dev/ttyACM0", 9600)
->>>>>>> 9799479b13463f7d8eae611493547c0a004b50eb
 millis1 = int(round(time.time() * 1000))
 millis2 = int(round(time.time() * 1000))
 millis3 = int(round(time.time() * 1000))
@@ -23,11 +19,7 @@ millis6 = int(round(time.time() * 1000))
 while True:
     donnee = mirror.readline()
     if donnee!="0000" :
-<<<<<<< HEAD
-          #print(donnee)
-=======
-          print(donnee)
->>>>>>> 9799479b13463f7d8eae611493547c0a004b50eb
+#          print(donnee)
 #          print(millis1+2000)
           if donnee[0:1] == "A" and int(round(time.time() * 1000))>(millis1+5000): # Puce posée
               print('egg01')
