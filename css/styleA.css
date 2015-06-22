@@ -286,11 +286,7 @@ display:none;
   font-size: 30px;
   font-weight: 200;
   width: 75px;
-<<<<<<< HEAD
   height: 50px;
-=======
-  height: 40px;
->>>>>>> 9799479b13463f7d8eae611493547c0a004b50eb
   margin: 10px;    
   z-index: 20;
   border-bottom: 1px dashed #555; 
@@ -392,13 +388,8 @@ display:none;
   vertical-align: top;
   background:url('../images/icones/sprite_icone.png') no-repeat;
   overflow: hidden;
-<<<<<<< HEAD
   width: 45px;
   height: 60px;
-=======
-  width: 40px;
-  height: 40px;
->>>>>>> 9799479b13463f7d8eae611493547c0a004b50eb
   position: relative;
   color:#000;
   font-size: 25px;
