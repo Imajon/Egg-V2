@@ -190,11 +190,7 @@ $(document).ready(function(){
   var yPos = 0;
   var boolLoad = true;
   var arrayEtat = Array('A','B','C','D','E','F','H','G');    
-<<<<<<< HEAD
-  var nbTouch = 12;
-=======
   var nbTouch = 0;
->>>>>>> 9799479b13463f7d8eae611493547c0a004b50eb
   /*$("body").bind("touchstart", function(evt){
     evt.preventDefault();
   })
@@ -234,11 +230,6 @@ $(document).ready(function(){
     $('.contain_Sujet').html('');    
     $("#BlocInfo").show();
     $("#textInfo").html($('.introTXT').html());
-<<<<<<< HEAD
-  });
-=======
-  });*/
->>>>>>> 9799479b13463f7d8eae611493547c0a004b50eb
   $( "#icone2, #imagecentre2" ).click(function() {
     scrollBool=false;
     //$('.contain_Sujet').html('');    
@@ -249,11 +240,6 @@ $(document).ready(function(){
     scrollBool=false;
     $("#BlocInfo").show();
     $("#textInfo").html($('.geoLoc').html()+'<br>');
-<<<<<<< HEAD
-  });  */
-=======
-  });  
->>>>>>> 9799479b13463f7d8eae611493547c0a004b50eb
   $(".titreBlocInfo").click(function() {
     $( "#BlocInfo" ).hide();
   });
@@ -358,7 +344,6 @@ $(document).ready(function(){
     }                    
     return cible;
   }        
-<<<<<<< HEAD
   socket.on('upload_notif', function (user) {
       createMessageLive(numSousSouvenir,user.img,user.mess,user.date);
       numSousSouvenir++;
@@ -367,7 +352,6 @@ $(document).ready(function(){
       nbTouch++;
       $('.nbTouch').html(nbTouch);              
   });
-=======
   /*socket.on('notifTwit', function (user) {
       $('.contain_Sujet').prepend('<div id="draggable'+numDrag+'" class="blocHistoire" alt="'+user.namo+'"><div class="background_noob blocNotif_txt pos_notif_story">'+(numDrag+2)+'</div><div class="blocTime"></div><div class="storyTitle">'+user.namo+'</div><div class="dragImgClass"><img class="img'+numDrag+'" src="'+user.profile_img+'" width="70" class="imgHistoire imgHistoire'+numDrag+'"></div></div>');
       numDrag++;
@@ -407,7 +391,6 @@ $(document).ready(function(){
       $('.containerBloc').append('<div id="draggable'+numBlocHastag+'" class="ui-widget-content font2 dragClass draggable dragor"><span class="displayOut2">'+user.subject+'</span><span class="displayOut">point.png</span></div>');
       numBlocHastag++;
   });*/  
->>>>>>> 9799479b13463f7d8eae611493547c0a004b50eb
   var Time1;
   function updateIcone(cible1,cible2){
     clearTimeout(Time1);
@@ -429,12 +412,8 @@ $(document).ready(function(){
     //updateIcone('icone01','-62px');
     $('.nbUser').html(data.all);
     $('.nbImg').html(data.img);
-<<<<<<< HEAD
     $('.nbTouch').html(data.nbTouch);
     console.log('newuser touch '+data.nbTouch);
-=======
-    console.log('newuser');
->>>>>>> 9799479b13463f7d8eae611493547c0a004b50eb
     //$('.contain3').prepend('<div id="bloc'+data.id+'" class="background_noob bgd_notif2 "><span>'+data.id+'</span></div>');
     //$('bloc'+numHastag).hide();
     //$('bloc'+numHastag).fadeTo('400',1);
