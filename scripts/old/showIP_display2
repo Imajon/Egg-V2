@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "jon ">test.txt
+echo " en force">>test.txt
+perl -pi.orig -e 's/\n/ /' test.txt
+sudo /home/pi/PCD/samples/pcd8544_display_txt
+

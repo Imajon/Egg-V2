@@ -1,0 +1,26 @@
+#!/bin/bash
+#color=`convert $1[1x1+$2+$3] -depth 8 txt: | tail -n +2 | sed -n 's/^.*\(#[^ ]*\).*$/\1/p'`
+color=`convert $1[1x1+100+100] -depth 8 txt: | tail -n +2 | sed -n 's/^.*\(#[^ ]*\).*$/\1/p'`
+color2=`echo $color | cut -c2-6`
+#echo $color2
+printf "10;%d;%d;%d;2;4;0\n" 0x${color2:0:2} 0x${color2:2:2} 0x${color2:4:2}
+/home/pi/noob/scripts/writeSerie "10;$((16#${color2:0:2}));$((16#${color2:2:2}));$((16#${color2:4:2}));2;4;0"
+sleep 1
+color=`convert $1[1x1+10+200] -depth 8 txt: | tail -n +2 | sed -n 's/^.*\(#[^ ]*\).*$/\1/p'`
+color2=`echo $color | cut -c2-6`
+printf "10;%d;%d;%d;2;4;0\n" 0x${color2:0:2} 0x${color2:2:2} 0x${color2:4:2}
+/home/pi/noob/scripts/writeSerie "10;$((16#${color2:0:2}));$((16#${color2:2:2}));$((16#${color2:4:2}));2;4;0"
+sleep 1
+/home/pi/noob/scripts/writeSerie "10;0;0;90;2;4;0"
+
+#hexinput=`echo $color | tr '[:lower:]' '[:upper:]'` #uppercaseing
+#a=`echo $hexinput | cut -c-2`
+#b=`echo $hexinput | cut -c3-4`
+#c=`echo $hexinput | cut -c5-6`
+
+#r=`echo "ibase=16; $a" | bc`
+#g=`echo "ibase=16; $b" | bc`
+#b=`echo "ibase=16; $c" | bc`
+
+#echo $r $g $b
+#exit 0

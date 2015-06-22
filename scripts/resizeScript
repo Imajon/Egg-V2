@@ -1,0 +1,2 @@
+#!/bin/bash
+convert /home/pi/noob/uploadsDir/$1 -resize 500 -auto-orient /home/pi/noob/uploadsDir/mini/$1

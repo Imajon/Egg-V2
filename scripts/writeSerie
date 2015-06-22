@@ -1,0 +1,7 @@
+#! /bin/sh
+#stty -F /dev/ttyACM0 9600 cs8 cread clocal
+#exec 3> /dev/ttyACM0
+#sleep 0.4
+#echo 'B' >&3
+#sleep 0.5
+echo $1 > /dev/ttyUSB0

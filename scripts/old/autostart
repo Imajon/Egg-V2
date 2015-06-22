@@ -1,0 +1,4 @@
+@lxpanel --profile LXDE
+@pcmanfm --desktop --profile LXDE
+#@xscreensaver -no-splash
+@midori -e Fullscreen -a http://localhost:8001/screen_chat.htm

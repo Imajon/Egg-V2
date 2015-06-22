@@ -1,0 +1,10 @@
+#!/bin/bash
+
+out=""
+for (( i=1; i <= $1; i++ ))
+do
+ #echo "A"
+ out=$out'A'
+done
+out=$out'1'
+echo $out > /home/pi/noob/scripts/progressYoshi.txt

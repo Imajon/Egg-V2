@@ -1,0 +1,4 @@
+#!/bin/bash
+cc -o /home/pi/PCD/samples/pcd8544_display_oeuf_IP2 /home/pi/PCD/samples/pcd8544_display_progressB.c /home/pi/PCD/PCD8544.c -L/usr/local/lib -lwiringPi
+sleep 1
+sudo /home/pi/PCD/samples/pcd8544_display_oeuf_IP2

@@ -1,0 +1,19 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body{
+	background-color:#333;
+	font-family:"Times New Roman", Times, serif;
+}
+.draggableB{
+	overflow:hidden;
+	width:90%;
+	background-color:#111;
+	height:30px;
+	margin: 10px auto;
+	text-align:center;
+}
+.draggable{
+	color:#CCC;
+	font-size:16px;	
+}
