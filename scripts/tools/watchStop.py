@@ -25,4 +25,4 @@ while True:
     else:
         time.sleep(0.1)
 print('Shutdown button pressed. System is going to halt now')
-subprocess.call('halt')
+#subprocess.call('halt')

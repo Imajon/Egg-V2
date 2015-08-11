@@ -1,5 +1,5 @@
 #include <Adafruit_NeoPixel.h>
-#include <MicroView.h>
+//#include <MicroView.h>
 #include <CapacitiveSensor.h>
 
 #define PIN 6
@@ -120,9 +120,9 @@ void setup() {
   strip.show();
   //cs_4_2.set_CS_AutocaL_Millis(5000);     // turn off autocalibrate on channel 1 - just as an example
   //cs_4_7.set_CS_AutocaL_Millis(200000);     // turn off autocalibrate on channel 1 - just as an example
-  uView.begin();
-  uView.clear(ALL);
-  uView.display();  
+  //uView.begin();
+  //uView.clear(ALL);
+  //uView.display();  
   // Set UP pulsation led for all
   startInt(periode,300,0,2,0,PIXEL);
   startInt(periodeCible,1000,0,2,0,PIXEL);
@@ -145,7 +145,9 @@ void setup() {
   startInt(amplitudeGCible,0,0,2,PIXEL-4,PIXEL);
   startInt(amplitudeBCible,0,0,2,PIXEL-4,PIXEL);
   /////////////////////////////////////
-  selectLed(0,26,0,0,90);
+  //selectLed(0,26,0,0,90);
+  phaseLed_cible(4,6,0,0,9);
+
 }
 void loop() {
     time = millis();
@@ -260,14 +262,14 @@ void loop() {
         }
       }
     }  
-    uView.clear(PAGE);    // clear page
+    /*uView.clear(PAGE);    // clear page
     uView.setCursor(0,0); // set cursor to 0,0
     uView.print(timePulse); // display Mid
     uView.setCursor(0,10); // set cursor to 0,0
     uView.print(boolPulse); // display Mid
     uView.setCursor(0,20); // set cursor to 0,0
     uView.print(122+122*cos(2*PI/2000*((300)-time))); // display Mid
-    uView.display();
+    uView.display();*/
     if(millis()-timePulseA>1000 && boolPulseA==true){
       selectLed(0,PIXEL,0,0,90);
       //startInt(periodeCible,1500,0,true,0,PIXEL);      

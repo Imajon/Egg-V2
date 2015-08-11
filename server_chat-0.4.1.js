@@ -71,10 +71,9 @@ function addFile(fileName,message,datejour){
 	        console.log("The file was saved!");
 	    }
 	});	
-}
 	console.log(data);
 	io.sockets.emit('arduino_notif', nbTouch);	
-});
+};
 ls.stderr.on('data', function (data) {
     console.log('stderr: ' + data);
 });	
@@ -184,14 +183,6 @@ function millisTwit(){
 function millisEgg(){
 	boolEgg = true;
 }
-function addTwit(){
-	if(idTwt<=33){
-	  var resultTwit = Math.floor(idTwt/3);
-	  //execDebian('scripts/showOeuf '+resultTwit);
-	}
-	idTwt++;
-}
-addTwit();
 io.sockets.on( 'connection', function ( socket ) {
 	var resultTW = false;
 	var resultIN = false;
