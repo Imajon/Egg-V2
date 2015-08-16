@@ -31,20 +31,37 @@ function createMessage(cible,file,message,date){
       $('.contain_Sujet').append('<div id="draggable'+cible+'" class="blocHistoire sortable" alt="'+cible+'"><a href="uploadsDir/mini/'+file+'" class="dragImgClass"><img class="img'+cible+'" id="img'+cible+'" src="uploadsDir/mini/'+file+'"  exif="true" width="70" class="imgHistoire imgHistoire'+cible+'"></a><span class="titreImg">'+message+'<br>'+date+'</span></div>');                    
 }
 function createMessageLive(cible,file,message,date){
-      $('.contain_Sujet').przpend('<div id="draggable'+cible+'" class="blocHistoire sortable" alt="'+cible+'"><a href="uploadsDir/'+file+'" class="dragImgClass"><img class="img'+cible+'" id="img'+cible+'" src="uploadsDir/'+file+'"  exif="true" width="70" class="imgHistoire imgHistoire'+cible+'"></a><span class="titreImg">'+message+'<br>'+date+'</span></div>');                    
+    var dateScreen = convertDate(date)  
+    $('.contain_Sujet').prepend('<div id="draggable'+cible+'" class="blocHistoire sortable" alt="'+cible+'"><a href="'+file+'" class="dragImgClass"><img class="img'+cible+'" id="img'+cible+'" src="'+file+'"  exif="true" width="70" class="imgHistoire imgHistoire'+cible+'"></a><span class="titreImg">'+message+'<br>'+dateScreen+'</span></div>');                    
+    var wido = $('#draggable'+cible).css('width');
+    $('#draggable'+cible).css('height',($('#draggable'+cible+' div img').parent().parent().width()/1.33)+20);       
+    $('#draggable'+cible+' div').css('height',($('#draggable'+cible+' div img').parent().parent().width()/1.33)+20);       
+    $('#draggable'+cible+' img').load(function(){
+        numScroll++;
+        idHistoire--;
+        var wCible = ($('#draggable'+cible).width()-$(this).width())/2;
+        var hCible = ($('#draggable'+cible).height()-$(this).height())/2;
+        $('#draggable'+cible).css('height',wido);
+        if($(this).height()>$(this).width()){
+          $(this).css('width','100%');
+          //$(this).css('margin-top',hCible+'px');
+          $(this).css('height','auto');
+        }else{
+          $(this).css('height',wido);
+          //$(this).css('margin-left',wCible+'px');
+          $(this).css('width','auto');
+        }
+        if(idHistoire>=0){
+          recapHistoire(idHistoire,cible2,totalJour,numJour);
+        }else{
+         
+        }
+    });   
 }
-function recapHistoire(cible,cible2,numJour){
-  var retourALT = cible;
-  var posX = Math.floor(Math.random()*80);
-  var posY = Math.floor(Math.random()*100);
-  var randomJour = Math.floor(Math.random()*10);
-  totalJour = numJour+randomJour;  
-  var dateToday = Date();    
- // $('.contain_Sujet').append('<div id="draggable'+cible+'" style="left:'+posX+';top:'+posY+';" class="blocHistoire sortable" alt="'+retourALT+'"><div class="dragImgClass"><img class="img'+cible+'" src="'+cible2[cible]+'" width="70" class="imgHistoire imgHistoire'+cible+'"></div></div>');
-  //$('.contain_Sujet').append('<div id="draggable'+cible+'" style="left:'+posX+';top:'+posY+';" class="blocHistoire sortable" alt="'+retourALT+'"><div class="dragImgClass"><img class="img'+cible+'" src="'+cible2[cible]+'" width="70" class="imgHistoire imgHistoire'+cible+'"></div></div>');
-  dateToday.getTime();
-  var difDate = dateToday-cible2[cible].date;
-  if(cible2[cible].img!='' && cible2[cible].img!=undefined && cible2[cible].type!=numJour){
+function convertDate(date){
+    var dateToday = new Date();
+    dateToday.getTime();
+    var difDate = dateToday-date;
     var dateScreen = '';
     difDate = difDate/1000;
     if(difDate<60){
@@ -56,9 +73,19 @@ function recapHistoire(cible,cible2,numJour){
     }else if(difDate>86400){
       dateScreen = Math.floor(difDate/86400)+' jour';      
     }
-    if(cible2[cible].img.indexOf('icone_main')==-1 || cible2[cible].img.indexOf('icone_feuille')==-1){
-      $('.contain_Sujet').append('<div id="draggable'+cible+'" class="blocHistoire sortable" alt="'+retourALT+'"><a href="uploadsDir/mini/'+cible2[cible].img+'" class="dragImgClass"><img class="img'+cible+'" id="img'+cible+'" src="uploadsDir/mini/'+cible2[cible].img+'"  exif="true" width="70" class="imgHistoire imgHistoire'+cible+'"></a><span class="titreImg">'+cible2[cible].mess+'<br>'+dateScreen+'</span></div>');                    
-    }
+    return dateScreen;
+}
+function recapHistoire(cible,cible2,numJour){
+  var retourALT = cible;
+  var posX = Math.floor(Math.random()*80);
+  var posY = Math.floor(Math.random()*100);
+  var randomJour = Math.floor(Math.random()*10);
+  totalJour = numJour+randomJour;      
+  //$('.contain_Sujet').append('<div id="draggable'+cible+'" style="left:'+posX+';top:'+posY+';" class="blocHistoire sortable" alt="'+retourALT+'"><div class="dragImgClass"><img class="img'+cible+'" src="'+cible2[cible]+'" width="70" class="imgHistoire imgHistoire'+cible+'"></div></div>');
+  //$('.contain_Sujet').append('<div id="draggable'+cible+'" style="left:'+posX+';top:'+posY+';" class="blocHistoire sortable" alt="'+retourALT+'"><div class="dragImgClass"><img class="img'+cible+'" src="'+cible2[cible]+'" width="70" class="imgHistoire imgHistoire'+cible+'"></div></div>');
+  if(cible2[cible].img!='' && cible2[cible].img!=undefined && cible2[cible].type!=numJour){
+    var dateScreen = convertDate(cible2[cible].date)
+    $('.contain_Sujet').append('<div id="draggable'+cible+'" class="blocHistoire sortable" alt="'+retourALT+'"><a href="uploadsDir/mini/'+cible2[cible].img+'" class="dragImgClass"><img class="img'+cible+'" id="img'+cible+'" src="uploadsDir/mini/'+cible2[cible].img+'"  exif="true" width="70" class="imgHistoire imgHistoire'+cible+'"></a><span class="titreImg">'+cible2[cible].mess+'<br>'+dateScreen+'</span></div>');                    
     var fileImg = document.getElementById('img'+cible);
     var wido = $('#draggable'+cible).css('width');
     $('#draggable'+cible).css('height',($('#draggable'+cible+' div img').parent().parent().width()/1.33)+20);       
@@ -118,7 +145,7 @@ window.addEventListener("load",function() {
     }
 });*/
 $(document).ready(function(){
-  var socket = io.connect('http://10.0.0.1/');
+  var socket = io.connect('http://192.168.1.13/');
   var stringA = '';
   var stringB = '';          
   var stringC = '';  
@@ -191,12 +218,12 @@ $(document).ready(function(){
   $(".titreBlocInfo").click(function() {
     $( "#BlocInfo" ).hide();
   });
-  $(".closebloc").click(function() {
-    $( "#BlocInfo" ).hide();
-  });
   /*$( ".blocTitre" ).click(function() {
     updateOeufIcone();
   }); */ 
+  $(".closebloc").click(function() {
+    $( "#BlocInfo" ).hide();
+  });
   
   $( ".sortable" ).click(function() {
     switch(this.id){
@@ -215,7 +242,6 @@ $(document).ready(function(){
               type: 'post',
               dataType: 'json',
               success: function(e){
-                console.log("e : "+e[0].img);
                  idHistoire = e.length-1;
                  boolLoad=false;
                  recapHistoire(idHistoire,e,numJour,6,'depot'); 
@@ -304,11 +330,6 @@ $(document).ready(function(){
       $('.contain_Sujet').prepend('<div id="draggable'+numDrag+'" class="blocHistoire" alt="'+user.namo+'"><div class="background_noob blocNotif_txt pos_notif_story">'+(numDrag+2)+'</div><div class="blocTime"></div><div class="storyTitle">'+user.namo+'</div><div class="dragImgClass"><img class="img'+numDrag+'" src="'+user.profile_img+'" width="70" class="imgHistoire imgHistoire'+numDrag+'"></div></div>');
       numDrag++;
   }); */            
-  socket.on('upload_notif', function (user) {
-    //updateIcone('img107',"icone11");
-      $('.contain_Sujet').prepend('<div id="draggable'+numSousSouvenir+' sortable" class="blocHistoire" alt="'+numDrag+'"><div class="dragImgClass"><img class="img'+numDrag+'" src="'+user.img+'" width="70" class="imgHistoire imgHistoire'+numDrag+'"><span class="titreImg">'+user.mess+'<br>'+user.date+'</span></div></div>');
-      numSousSouvenir++;
-  });
   socket.on('notifEgg', function (user) {
       //$('.contain_Sujet').prepend('<div id="draggable'+numSousSouvenir+'" class="blocHistoire_icone blocSensor" alt="'+numDrag+'"><div class="dragImgClass"><img class="img'+numDrag+'" src="images/icone-main.jpg" width="70" class="imgHistoire imgHistoire'+numDrag+'"></div></div>');
       //$('.pos_blocNotif_txt').html(numSousSouvenir);    

@@ -71,7 +71,6 @@ function addFile(fileName,message,datejour){
 	        console.log("The file was saved!");
 	    }
 	});	
-	console.log(data);
 	io.sockets.emit('arduino_notif', nbTouch);	
 };
 ls.stderr.on('data', function (data) {
@@ -91,7 +90,7 @@ function handler ( request, response ) {
 		});
 		response.write("404 Not Found\n");*/
 		response.writeHead("301",
-		  {Location: 'http://10.0.0.1/index.htm'}
+		  {Location: 'http://localhost/index.htm'}
 		);
 		response.write("ok\n");
 		return;			
@@ -125,7 +124,7 @@ function handler ( request, response ) {
 			form.on('end', function(err, fields, files) {
 				execDebian('scripts/writeSerie "6;60;0;90;30;1000;0"');
 				io.sockets.emit('upload_notif', {img:'uploadsDir/'+fileName,mess:mess,date:datejour});						
-				exec('scripts/resizeScript '+fileName, function(err, stdout, stderr) {
+				exec('scripts/resizeScript_OSX '+fileName, function(err, stdout, stderr) {
 					console.log(err);
 					console.log(stdout);
 					console.log(stderr);						
